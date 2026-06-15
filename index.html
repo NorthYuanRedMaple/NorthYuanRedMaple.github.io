@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>《异环》· 安魂曲 | 零的日常物语</title>
+  <!-- 预加载样式与字体（如果需要可换成本地字体） -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Serif+Pro:opsz@14&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="" crossorigin="anonymous">
+  <meta name="description" content="海特洛市的霓虹之下，鉴定师·零与安魂曲的都市日常与支线故事展示。">
+  <style>
+    :root{--accent:#E85D3A;--bg:#0b1118;--muted:#95a5c4;--card:#121a24}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(145deg,#080c14 0%,#10161f 100%);color:#ecedee;line-height:1.5;
+    }
+    a.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    a.skip-link:focus{left:12px;top:12px;width:auto;height:auto;padding:8px 12px;background:#111;border-radius:6px}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .hero-section{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;margin-bottom:36px}
+    .hero-bg{position:absolute;inset:0;opacity:0.6;background-repeat:repeat;z-index:0}
+    /* 使用内联 SVG 图案（已完整编码） */
+    .hero-bg{background-image:radial-gradient(circle at 30% 20%, rgba(232,93,58,0.14), transparent 50%),url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 40 40"><defs><linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#0f1721" stop-opacity="0.35"/><stop offset="100%" stop-color="#162029" stop-opacity="0.6"/></linearGradient></defs><rect width="40" height="40" fill="url(%23g)"/><circle cx="6" cy="6" r="1.5" fill="#1f2a36" fill-opacity="0.6"/><circle cx="34" cy="10" r="1" fill="#27313a" fill-opacity="0.5"/></svg>');background-size:160px}
+    .hero-content{position:relative;z-index:2;max-width:880px;padding:48px 24px}
+    h1{font-size:3.2rem;margin:0;background:linear-gradient(135deg,#FEF6E6,#FFCDB2,#E85D3A);-webkit-background-clip:text;color:transparent;letter-spacing:-0.02em}
+    .tagline{color:#F0B28A;margin-top:12px;letter-spacing:4px}
+    .divider{width:72px;height:4px;background:var(--accent);margin:20px auto;border-radius:3px}
+
+    .character-archive{background:rgba(18,24,34,0.7);backdrop-filter:blur(6px);border-radius:28px;padding:28px;border:1px solid rgba(232,93,58,0.18);margin:18px 0}
+    .two-cols{display:flex;gap:20px;flex-wrap:wrap}
+    .col{flex:1;min-width:260px}
+    .profile-card{background:rgba(10,14,20,0.6);border-radius:18px;padding:20px;text-align:left;border:1px solid rgba(255,140,90,0.06)}
+    .avatar-icon{font-size:48px;color:var(--accent);margin-bottom:12px}
+    .profile-card h3{font-size:1.25rem;margin:6px 0}
+    .sub{color:var(--accent);font-weight:600;text-transform:uppercase;font-size:0.78rem}
+    .info-list{list-style:none;padding:0;margin-top:12px}
+    .info-list li{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .info-list i{width:26px;color:#F0B28A}
+    .desc-text{color:#cfdfee;font-size:0.95rem;margin-top:12px}
+
+    .endings-showcase{margin:36px 0}
+    .section-title{font-size:1.6rem;font-weight:600;display:flex;align-items:center;gap:10px}
+    .section-sub{color:var(--muted);margin:12px 0;padding-left:12px;border-left:3px solid var(--accent)}
+    .story-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .story-card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid #222;cursor:pointer;transition:transform 180ms,box-shadow 180ms;padding:0}
+    .story-card:focus{outline:3px solid rgba(232,93,58,0.18)}
+    .card-media{padding:20px;text-align:center;border-bottom:1px solid #1d2730}
+    .card-content{padding:16px}
+    .card-content h3{margin:0 0 8px}
+    .badge{display:inline-block;background:rgba(232,93,58,0.12);color:#ffb48a;border-radius:999px;padding:6px 10px;font-weight:600}
+
+    .detail-panel{background:#071018;border-radius:18px;padding:20px;border:1px solid #1e2a36;margin-top:24px}
+    .detail-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(232,93,58,0.06);padding-bottom:12px}
+    .detail-story{white-space:pre-wrap;color:#dbe9ff;margin-top:12px}
+
+    .extra-encounters{margin:28px 0;padding:18px;border-radius:14px;background:linear-gradient(120deg,#071018,#0d141b)}
+    .grid-mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .mini-card{background:#0d1620;padding:14px;border-radius:12px}
+
+    .sound-toggle{position:fixed;right:18px;bottom:18px;background:var(--accent);width:52px;height:52px;border-radius:40px;display:flex;align-items:center;justify-content:center;border:none;color:white;z-index:99}
+
+    footer{text-align:center;padding:28px 0;color:#7e8a9b;font-size:0.85rem}
+
+    @media (max-width:780px){h1{font-size:2rem}.hero-content{padding:20px}.container{padding:12px}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要内容</a>
+  <div class="hero-section" role="banner">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content container">
+      <h1>安魂曲 · 零</h1>
+      <div class="tagline">REQUIEM · ZERO</div>
+      <div class="divider" aria-hidden="true"></div>
+      <p>海特洛市的霓虹之下，异象与日常交错。这是鉴定师·零与E.T.D四队王牌·安魂曲的专属记忆与支线回忆录，旨在展示角色互动与氛围故事。</p>
+    </div>
+  </div>
+
+  <main id="main" class="container" role="main">
+
+    <section class="character-archive" aria-labelledby="charactersTitle">
+      <h2 id="charactersTitle" style="display:none">角色档案</h2>
+      <div class="two-cols">
+        <article class="col profile-card" aria-labelledby="charZeroName">
+          <div class="avatar-icon" aria-hidden="true"><i class="fas fa-user-astronaut"></i></div>
+          <h3 id="charZeroName">零 <small style="font-size:0.9rem;">(男性)</small></h3>
+          <div class="sub">伊波恩古董店 · 无证鉴定师</div>
+          <ul class="info-list">
+            <li><i class="fas fa-dna" aria-hidden="true"></i><span>异能 · 第零感（光属性）——能感知并鉴定异象本质。</span></li>
+            <li><i class="fas fa-eye" aria-hidden="true"></i><span>异象奇点感知｜“直视即泯除”——短暂直视能抹除异象效应的记忆与能量。</span></li>
+            <li><i class="fas fa-shield-alt" aria-hidden="true"></i><span>无可检测的维特海默值——常规检测工具无法获取其能量参数。</span></li>
+            <li><i class="fas fa-city" aria-hidden="true"></i><span>所属：伊波恩古董店（民间异象猎人）</span></li>
+          </ul>
+          <p class="desc-text">零从失忆与空白中苏醒，带着无法被常规测定的能力。在伊波恩古董店里，他以低调的方式接手委托：鉴定被异象影响的物件与回收异常碎片。他温和、冷静，擅长在复杂证据中抽丝剥茧，是安魂曲罕见的信任对象与伙伴。</p>
+        </article>
+
+        <article class="col profile-card" aria-labelledby="charRequiemName">
+          <div class="avatar-icon" aria-hidden="true"><i class="fas fa-moon"></i></div>
+          <h3 id="charRequiemName">安魂曲</h3>
+          <div class="sub">E.T.D禁制机动队四队 · 王牌</div>
+          <ul class="info-list">
+            <li><i class="fas fa-tomato" aria-hidden="true"></i><span>异能 · 安魂弥撒（暗系）——能以仪式式歌声稳定或扰乱目标情绪与异能波动。</span></li>
+            <li><i class="fas fa-bed" aria-hidden="true"></i><span>习惯：长时睡眠（表面理由：保存体力以备突发任务）</span></li>
+            <li><i class="fas fa-heart" aria-hidden="true"></i><span>嗜好：番茄制品，喜欢收集小玩意与呗果论坛的匿名讨论。</span></li>
+            <li><i class="fas fa-building" aria-hidden="true"></i><span>常出没地点：休息室、屋顶、楼梯间——这些地方常存放她的私人物品与回忆片段。</span></li>
+          </ul>
+          <p class="desc-text">安魂曲是局里最古怪却也最可靠的王牌。她看似沉睡与疏离，实则拥有‘技能复制’的天赋与精确的战场判断。外界眼中的“可爱”掩盖了她复杂的内心与未解之谜。与零的羁绊是逐步建立起来的：从互相试探到互相依靠。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="endings-showcase" aria-labelledby="storiesTitle">
+      <h2 id="storiesTitle" class="section-title"><i class="fas fa-book-open" aria-hidden="true"></i><span> 海特洛日常物语</span></h2>
+      <p class="section-sub">与零 & 安魂曲交织的「羁遇」——选择不同的支线，浮现独一无二的结局。</p>
+
+      <div class="story-cards" id="storyCards" role="list">
+        <div class="story-card" role="listitem" data-story-id="0" tabindex="0" aria-describedby="card0desc">
+          <div class="card-media"><i class="fas fa-tomato" aria-hidden="true"></i></div>
+          <div class="card-content">
+            <h3>🍅 番茄酱纯白之夜</h3>
+            <p id="card0desc">深夜的米格尔区，安魂曲在自动贩卖机前被拍成“破坏公物”的镜头，零陪同调查，揭露真相并化解谣言。</p>
+            <span class="badge">★ 日常结局 · 洗刷冤屈</span>
+          </div>
+        </div>
+
+        <div class="story-card" role="listitem" data-story-id="1" tabindex="0" aria-describedby="card1desc">
+          <div class="card-media"><i class="fas fa-star-of-life" aria-hidden="true"></i></div>
+          <div class="card-content">
+            <h3>🌃 摩天轮上数星星</h3>
+            <p id="card1desc">顶楼游乐园的摩天轮上，城市灯火如流银河。零与安魂曲在缓缓旋转中交换了心事，彼此靠近了一点。</p>
+            <span class="badge">☆ 偶遇剧情 · 灯火繁星</span>
+          </div>
+        </div>
+
+        <div class="story-card" role="listitem" data-story-id="2" tabindex="0" aria-describedby="card2desc">
+          <div class="card-media"><i class="fas fa-car-crash" aria-hidden="true"></i></div>
+          <div class="card-content">
+            <h3>⚙️ 报废车场的午后</h3>
+            <p id="card2desc">在荒废的车场里，两人切磋异能，夕阳下的交流化解隔阂，安魂曲在零肩上沉睡，展露温柔一面。</p>
+            <span class="badge">★ 羁绊结局 · 安心的依靠</span>
+          </div>
+        </div>
+
+        <div class="story-card" role="listitem" data-story-id="3" tabindex="0" aria-describedby="card3desc">
+          <div class="card-media"><i class="fas fa-bed" aria-hidden="true"></i></div>
+          <div class="card-content">
+            <h3>🛌 迷路协奏曲与棺中眠</h3>
+            <p id="card3desc">在管理局楼梯间的秘密角落，安魂曲睡在看似奇怪的‘棺材’里，零陪伴她完成一段温馨又诡秘的午睡仪式。</p>
+            <span class="badge">☆ 支线结局 · 温馨同眠</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-panel" aria-live="polite" id="storyDetailPanel">
+      <div class="detail-header">
+        <h2 id="detailTitle">🍅 番茄酱纯白之夜</h2>
+        <span id="detailType">日常结局 · 洗刷冤屈</span>
+      </div>
+      <div class="detail-story" id="detailText">夜幕下的海特洛市闪烁着霓虹，零接到安魂曲发来的一条含混简讯：“番茄...坏了...不是我。”赶到现场时，安魂曲正呆呆站在一片狼藉的番茄酱售卖机前，浑身是酱。网络上疯传的片段把她描绘成破坏者——然而监控录像显示，真正的破坏源自一次被异象侵染的设备短路，机器在瞬间释放了粘稠的红色雾气，吸走了自洁程序并溅洒出番茄浆。零通过对监控与能量残留的鉴定，证明了安魂曲的清白。两人在直播中揭露真相，安魂曲笨拙地道歉并被观众的同情与喜爱所包围。结局里，她低头看着包装盒说：“被信任，比番茄酱还温暖。”</div>
+    </section>
+
+    <section class="extra-encounters" aria-labelledby="extrasTitle">
+      <div style="display:flex;align-items:center;gap:12px"><i class="fas fa-map-marked-alt" aria-hidden="true"></i><h3 id="extrasTitle">更多支线 · 都市协奏</h3></div>
+      <div class="grid-mini">
+        <div class="mini-card" id="miniEvent0" tabindex="0" role="button" aria-pressed="false"> 
+          <i class="fas fa-ghost" aria-hidden="true"></i>
+          <h4>「无首铁驭」追缉</h4>
+          <p style="font-size:0.85rem">零与安魂曲追查一处被异常改装的铁轨系统，安魂曲复制并运用‘铁驭冲击’，二人合力完成S级任务，夜归时两人在伊波恩店分享一瓶番茄酱作为庆祝。</p>
+        </div>
+        <div class="mini-card" id="miniEvent1" tabindex="0" role="button" aria-pressed="false">
+          <i class="fas fa-book" aria-hidden="true"></i>
+          <h4>漫画同好会事件</h4>
+          <p style="font-size:0.85rem">零发现安魂曲私下是《公爵K》的狂热粉丝，帮她换来签名周边，两人一同在呗果论坛上暗中互动，彼此的距离因此拉近。</p>
+        </div>
+        <div class="mini-card" id="miniEvent2" tabindex="0" role="button" aria-pressed="false">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+          <h4>画画的城市涂鸦</h4>
+          <p style="font-size:0.85rem">安魂曲因私自涂鸦被投诉，零陪她参加社区修复活动，两人合作完成公益墙绘，作品意外被市民称赞。</p>
+        </div>
+        <div class="mini-card" id="miniEvent3" tabindex="0" role="button" aria-pressed="false">
+          <i class="fas fa-crown" aria-hidden="true"></i>
+          <h4>「游梦洄廊」旧忆</h4>
+          <p style="font-size:0.85rem">零潜入安魂曲的意识域，见到她幼年孤独的画面。两人在那段回忆中相互承诺，给予彼此名字以外的意义与归属。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>《异环》Neverness to Everness · 超自然都市开放世界 | 同人/资料展示</p>
+      <p style="margin-top:8px;color:var(--muted)"><i class="fas fa-heart" aria-hidden="true" style="color:var(--accent)"></i> 背景设定致敬幻塔工作室·海特洛都市</p>
+    </footer>
+
+  </main>
+
+  <!-- 音频：使用相对路径以便你将音频文件放到仓库（assets/audio/requiem.mp3）。若想继续使用外部托管，请替换 src。 -->
+  <button id="musicToggle" class="sound-toggle" aria-label="切换背景音乐" aria-pressed="false" title="播放/暂停音乐">
+    <i class="fas fa-music" aria-hidden="true"></i>
+  </button>
+  <audio id="bgMusic" loop preload="none">
+    <source src="/assets/audio/requiem.mp3" type="audio/mpeg">
+    <!-- 为未支持 audio 的浏览器提供文本提示 -->
+    您的浏览器不支持内嵌音频。请下载或使用支持的浏览器播放背景音乐。
+  </audio>
+
+  <script>
+    // 可访问性增强：让卡片支持键盘触发（Enter / Space）
+    function makeKeyboardClickable(node, fn){
+      node.addEventListener('keydown', (e)=>{
+        if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
+          e.preventDefault();fn();
+        }
+      });
+    }
+
+    const storyDB = [
+      {
+        title: "🍅 番茄酱纯白之夜",
+        type: "日常结局 · 洗刷冤屈",
+        text: "夜幕下的米格尔区，安魂曲被一段断章取义的短视频描绘成破坏公物的嫌疑人。零在现场检查监控与能量残留后发现：自动贩卖机因为异象短路而释放粘稠红色雾体，导致番茄酱外泄。通过直播和证据呈现，零成功还原真相，安魂曲被清白证明，两人也因此在公众面前真诚互相理解。"
+      },
+      {
+        title: "🌃 摩天轮上数星星",
+        type: "偶遇剧情 · 灯火繁星",
+        text: "午夜的摩天轮缓缓旋转，城市灯海像流动的银河。安魂曲难得清醒，和零在高空短暂抛开职责，交换了对过去与未来的看法。那一夜，她看见了另一种光，零也放下防备，彼此靠近了一点。"
+      },
+      {
+        title: "⚙️ 报废车场的午后",
+        type: "羁绊结局 · 安心的依靠",
+        text: "在废弃的车场里，安魂曲练习异能以避免对公共设施造成损害，零偶然路过并提出指导。两人的切磋结束在夕阳下的寂静里，安魂曲靠在零的肩膀上进入沉睡，彼此间的信任在平凡瞬间升华。"
+      },
+      {
+        title: "🛌 迷路协奏曲与棺中眠",
+        type: "支线结局 · 温馨同眠",
+        text: "某次任务后，安魂曲在楼梯间的角落里蜷缩在一个造型奇特的棺材里补觉。零被要求去寻找她，发现后两人发现这是她的‘安全区’。在那片狭小且温暖的空间里，他们交换了各自的恐惧与安慰，建立了新的默契。"
+      }
+    ];
+
+    function updateDetailPanel(index){
+      const story = storyDB[index] || storyDB[0];
+      document.getElementById('detailTitle').textContent = story.title;
+      document.getElementById('detailType').textContent = story.type;
+      document.getElementById('detailText').textContent = story.text;
+      // 辅助无障碍: 将焦点移动到详情区并用 aria-live 提醒屏幕阅读器
+      document.getElementById('storyDetailPanel').focus({preventScroll:true});
+    }
+
+    // 绑定卡片点击与键盘操作
+    const cards = Array.from(document.querySelectorAll('.story-card'));
+    cards.forEach((card,idx)=>{
+      const handler = ()=> updateDetailPanel(idx);
+      card.addEventListener('click', handler);
+      makeKeyboardClickable(card, handler);
+      card.setAttribute('role','button');
+      card.setAttribute('aria-pressed','false');
+    });
+
+    // 绑定 mini-card 点击
+    const miniCards = Array.from(document.querySelectorAll('.mini-card'));
+    const miniEventsDesc = [
+      "✨ 支线·无首铁驭：夜晚追猎奇异异象，安魂曲复制技能配合零完成S评级追猎，事后二人在伊波恩分享番茄酱庆祝。",
+      "📖 漫画同好会：零帮忙获取限量签名，两人的互动在论坛中成为了粉丝们热议的话题。",
+      "🎨 公益涂鸦：安魂曲与零合作完成市政墙绘，为社区带来意想不到的温暖画面。",
+      "🌊 游梦洄廊：零进入安魂曲的记忆迷宫，帮助她直面过往并给予支持。"
+    ];
+
+    miniCards.forEach((mc,i)=>{
+      const fn = ()=> alert(miniEventsDesc[i]);
+      mc.addEventListener('click',fn);
+      makeKeyboardClickable(mc,fn);
+    });
+
+    // 背景音乐控制（使用相对路径，提示用户将音频放在 /assets/audio/requiem.mp3）
+    let musicPlaying=false;
+    const bgAudio = document.getElementById('bgMusic');
+    const toggleBtn = document.getElementById('musicToggle');
+    if(bgAudio){
+      bgAudio.volume = 0.35;
+      toggleBtn.addEventListener('click', ()=>{
+        if(musicPlaying){
+          bgAudio.pause();
+          musicPlaying=false;
+          toggleBtn.setAttribute('aria-pressed','false');
+        } else {
+          bgAudio.play().catch(()=>{
+            // 若本地资源缺失或浏览器限制：显示提示
+            alert('无法播放音频：请确保 /assets/audio/requiem.mp3 存在，或允许页面播放媒体。');
+          });
+          musicPlaying=true;
+          toggleBtn.setAttribute('aria-pressed','true');
+        }
+      });
+    }
+
+    // 默认展示第一个剧情
+    updateDetailPanel(0);
+
+    // 控制台致敬输出（仅装饰）
+    console.log('%c《异环》安魂曲·零专属网页 | 海特洛市欢迎你', 'color: #E85D3A; font-size: 14px;');
+  </script>
+</body>
+</html>
